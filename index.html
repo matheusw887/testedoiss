@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Botão Interativo</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+
+        .button-container {
+            position: relative;
+            width: 80%; /* Ajuste para telas móveis */
+            max-width: 300px; /* Limita o tamanho máximo */
+            height: 60px;
+        }
+
+        .button {
+            width: 100%;
+            height: 100%;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            touch-action: manipulation; /* Para garantir que o toque seja reconhecido corretamente */
+        }
+
+        .progress {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.5);
+            width: 0;
+        }
+
+        /* Ajuste visual para o botão */
+        @media (max-width: 600px) {
+            .button {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="button-container">
+        <button class="button" id="interactiveButton">
+            Segure para continuar
+        </button>
+        <div class="progress" id="progressBar"></div>
+    </div>
+
+    <script>
+        const button = document.getElementById('interactiveButton');
+        const progressBar = document.getElementById('progressBar');
+        const holdTime = 2000; // Tempo necessário para redirecionar (em milissegundos)
+        let timer;
+        let progressInterval;
+        let progress = 0;
+
+        button.addEventListener('touchstart', (e) => {
+            e.preventDefault(); // Previne o comportamento padrão do toque
+            progress = 0;
+            progressBar.style.width = '0%';
+            progressInterval = setInterval(() => {
+                progress += 100 / (holdTime / 100); // Incremento proporcional ao tempo
+                progressBar.style.width = `${progress}%`;
+
+                if (progress >= 100) {
+                    clearInterval(progressInterval);
+                    window.location.href = 'http://vesto.site'; // Substitua pela URL desejada
+                }
+            }, 100);
+        });
+
+        button.addEventListener('touchend', resetProgress);
+        button.addEventListener('touchcancel', resetProgress);
+
+        function resetProgress() {
+            clearInterval(progressInterval);
+            progressBar.style.width = '0%';
+            
+        }
+    </script>
+</body>
+</html>
