@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Botão Interativo</title>
+    <title>Página Inicial</title>
     <style>
         body {
             display: flex;
@@ -32,7 +32,7 @@
             font-size: 18px;
             font-weight: bold;
             cursor: pointer;
-            position: relative;
+            position: top;
             overflow: hidden;
             touch-action: manipulation; /* Para garantir que o toque seja reconhecido corretamente */
         }
@@ -57,7 +57,7 @@
 <body>
     <div class="button-container">
         <button class="button" id="interactiveButton">
-            Segure para continuar
+            SEGURE PARA CONTINUAR
         </button>
         <div class="progress" id="progressBar"></div>
     </div>
@@ -65,7 +65,7 @@
     <script>
         const button = document.getElementById('interactiveButton');
         const progressBar = document.getElementById('progressBar');
-        const holdTime = 2000; // Tempo necessário para redirecionar (em milissegundos)
+        const holdTime = 1500; // Tempo necessário para redirecionar (em milissegundos)
         let timer;
         let progressInterval;
         let progress = 0;
